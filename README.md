@@ -26,3 +26,9 @@ kubectl get pods
 # Access the app
 # http://localhost:30000
 ```
+
+## To Delete the deployments and services
+
+```
+kubectl delete -f <directory-name>/k8s
+```

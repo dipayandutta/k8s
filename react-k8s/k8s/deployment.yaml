@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: react-deployment
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: react-app
+
+  template:
+    metadata:
+      labels:
+        app: react-app
+
+    spec:
+      containers:
+        - name: react-container
+          image: dipayandutta/k8s:react-v2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+
+          envFrom:
+            - configMapRef:
+                name: react-config
+
+          volumeMounts:
+            - name: react-storage
+              mountPath: /shared-data
+
+      volumes:
+        - name: react-storage
+          persistentVolumeClaim:
+            claimName: react-pvc

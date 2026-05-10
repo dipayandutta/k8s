@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: react-config
+
+data:
+  REACT_APP_MESSAGE: "HELLO FROM KUBE CONFIG"

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: flask-deployment
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: flask-app
+
+  template:
+    metadata:
+      labels:
+        app: flask-app
+
+    spec:
+      containers:
+        - name: flask-container
+          image: dipayandutta/k8s:flask-v1
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 5000
+
+          volumeMounts:
+            - name: flask-storage
+              mountPath: /data
+
+      volumes:
+        - name: flask-storage
+          persistentVolumeClaim:
+            claimName: flask-pvc

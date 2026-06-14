@@ -1,0 +1,14 @@
+kubectl create namespace nginx-ns
+kubectl get daemonsets.apps -n nginx-ns
+NAME       DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+nginx-ds   2         2         2       2            2           <none>          80s
+❯ kubectl get pods
+No resources found in default namespace.
+❯ kubectl get pods -n nginx-ns
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-ds-blgqm   1/1     Running   0          89s
+nginx-ds-cvlsb   1/1     Running   0          89s
+❯ kubectl get pods -n nginx-ns -o wide
+NAME             READY   STATUS    RESTARTS   AGE    IP           NODE           NOMINATED NODE   READINESS GATES
+nginx-ds-blgqm   1/1     Running   0          100s   10.244.1.2   kind-worker2   <none>           <none>
+nginx-ds-cvlsb   1/1     Running   0          100s   10.244.2.2   kind-worker    <none>           <none>

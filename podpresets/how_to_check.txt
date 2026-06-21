@@ -1,0 +1,22 @@
+kubectl exec -it mysql -- mysql -u root -prootpassword -e "SHOW DATABASES;"
+Defaulted container "mysql" out of: mysql, init-mysql (init)
+mysql: [Warning] Using a password on the command line interface can be insecure.
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+❯ # Check your env vars were injected correctly
+kubectl exec -it mysql -- env | grep -E "MYSQL|SOCKET"
+Defaulted container "mysql" out of: mysql, init-mysql (init)
+MYSQL_MAJOR=8.0
+MYSQL_VERSION=8.0.46-1.el9
+MYSQL_SHELL_VERSION=8.0.46-1.el9
+MYSQL_DB_ROOT=3306
+MYSQL_ENGINE=innodb
+SOCKET_FILE=/var/run/mysql.sock
+MYSQL_ROOT_PASSWORD=rootpassword
+MYSQL_DATA_DIR=/data
